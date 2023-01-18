@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  location   Location @relation(fields: [locationId], references: [id])
+  locationId String
+
+  title         String
+  description   String?
+  startDateTime DateTime  @default(now())
+  endDateTime   DateTime? @default(now())
+  isCancelled   Boolean   @default(false)
+  imageUrl      String?
+}
+
+model Location {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title         String
+  description   String?
+  streetAddress String?
+  city          String?
+  state         String?
+  postalCode    String?
+
+  events Event[]
+}
