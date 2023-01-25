@@ -1,4 +1,4 @@
-import { updateEvent } from "$lib/schemas/updateEvent";
+import { updateEventSchema } from "$lib";
 import { PrismaClient } from "@prisma/client";
 import { fail, type Load } from "@sveltejs/kit";
 import type { Actions } from "./$types";
@@ -19,7 +19,7 @@ export const actions: Actions = {
 	default: async ({ request, params }) => {
 		const formData = await request.formData();
 
-		const validation = updateEvent.safeParse({
+		const validation = updateEventSchema.safeParse({
 			title: formData.get("title"),
 			description: formData.get("description"),
 		});

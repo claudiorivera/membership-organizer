@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const updateEvent = z.object({
+export const updateEventSchema = z.object({
 	title: z.string().min(1, "Title must not be blank").optional(),
 	description: z
 		.string()

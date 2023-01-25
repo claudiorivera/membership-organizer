@@ -1,4 +1,4 @@
-import { createEvent } from "$lib/schemas/createEvent";
+import { createEventSchema } from "$lib";
 import { PrismaClient } from "@prisma/client";
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
@@ -9,7 +9,7 @@ export const actions: Actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
 
-		const validation = createEvent.safeParse({
+		const validation = createEventSchema.safeParse({
 			title: formData.get("title"),
 			description: formData.get("description"),
 			locationId: formData.get("locationId"),
