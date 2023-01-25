@@ -1,6 +1,6 @@
+import { updateEvent } from "$lib/schemas/updateEvent";
 import { PrismaClient } from "@prisma/client";
-import type { Load } from "@sveltejs/kit";
-import { z } from "zod";
+import { fail, type Load } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 
 const prisma = new PrismaClient();
@@ -15,25 +15,31 @@ export const load: Load = async ({ params }) => {
 	};
 };
 
-const eventUpdateSchema = z.object({
-	title: z.string().optional(),
-	description: z.string().optional(),
-});
-
 export const actions: Actions = {
 	default: async ({ request, params }) => {
 		const formData = await request.formData();
 
-		const data = eventUpdateSchema.parse({
+		const validation = updateEvent.safeParse({
 			title: formData.get("title"),
 			description: formData.get("description"),
 		});
+
+		if (!validation.success) {
+			const errors = {
+				fieldErrors: validation.error.flatten().fieldErrors,
+				formErrors: validation.error.flatten().formErrors,
+			};
+
+			console.log({ errors });
+
+			return fail(400, errors);
+		}
 
 		await prisma.event.update({
 			where: {
 				id: params.eventId,
 			},
-			data,
+			data: validation.data,
 		});
 	},
 };

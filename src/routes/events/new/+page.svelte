@@ -12,21 +12,26 @@
 			{/each}
 		</div>
 	{/if}
-	<form method="POST" class="flex flex-col">
-		<label>
-			Title
-			<input name="title" type="text" />
+	<form method="POST" class="flex flex-col gap-4">
+		<label class="flex flex-col">
+			<div class="flex items-center gap-2 justify-between">
+				<span class="w-1/4">Title</span>
+				<input class="flex-grow" name="title" type="text" />
+			</div>
 			{#if form?.fieldErrors.title}
-				<div class="text-red-500">{form.fieldErrors.title}</div>
+				<span class="text-red-500">{form.fieldErrors.title}</span>
 			{/if}
 		</label>
-		<label>
-			Description
-			<textarea name="description" />
+		<label class="flex gap-2 items-center justify-between">
+			<span class="w-1/4">Description</span>
+			<textarea class="flex-grow" name="description" rows={5} />
 			{#if form?.fieldErrors.description}
 				<div class="text-red-500">{form.fieldErrors.description}</div>
 			{/if}
 		</label>
-		<button>Submit</button>
+		<button
+			class="hover:bg-sky-600 rounded px-4 py-2 font-semibold text-white bg-sky-700"
+			>Submit</button
+		>
 	</form>
 </div>
