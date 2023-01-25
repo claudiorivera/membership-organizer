@@ -1,6 +1,6 @@
 import { updateEventSchema } from "$lib";
 import { PrismaClient } from "@prisma/client";
-import { fail, type Load } from "@sveltejs/kit";
+import { fail, redirect, type Load } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 
 const prisma = new PrismaClient();
@@ -30,16 +30,18 @@ export const actions: Actions = {
 				formErrors: validation.error.flatten().formErrors,
 			};
 
-			console.log({ errors });
-
 			return fail(400, errors);
 		}
 
-		await prisma.event.update({
+		const event = await prisma.event.update({
 			where: {
 				id: params.eventId,
 			},
 			data: validation.data,
 		});
+
+		if (event) {
+			throw redirect(302, "/");
+		}
 	},
 };
