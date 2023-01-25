@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { title } from "process";
 	import type { ActionData } from "./$types";
 	export let form: ActionData;
 </script>
