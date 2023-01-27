@@ -1,10 +1,12 @@
+type FormatEventDateTimeArgs = {
+	startDateTime: Date;
+	endDateTime?: Date | null;
+};
+
 export const formatEventDateTime = ({
 	startDateTime,
 	endDateTime,
-}: {
-	startDateTime: Date;
-	endDateTime?: Date | null;
-}) => {
+}: FormatEventDateTimeArgs) => {
 	const startDate = formatDate(startDateTime);
 	const startTime = formatTime(startDateTime);
 

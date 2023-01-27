@@ -23,7 +23,7 @@ export const seed = async () => {
 				description: faker.lorem.paragraph(),
 				location: {
 					create: {
-						title: faker.address.cityName(),
+						name: faker.address.cityName(),
 						streetAddress: faker.address.streetAddress(),
 						city: faker.address.city(),
 						state: faker.address.stateAbbr(),

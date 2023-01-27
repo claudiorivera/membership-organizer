@@ -19,10 +19,12 @@ export const actions: Actions = {
 	default: async ({ request, params }) => {
 		const formData = await request.formData();
 
-		const validation = updateEventSchema.safeParse({
+		const formValues = {
 			title: formData.get("title"),
 			description: formData.get("description"),
-		});
+		};
+
+		const validation = updateEventSchema.safeParse(formValues);
 
 		if (!validation.success) {
 			const errors = {

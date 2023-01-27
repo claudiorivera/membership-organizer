@@ -11,6 +11,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': 5.49.0
   '@typescript-eslint/parser': 5.49.0
   autoprefixer: 10.4.13
+  clsx: 1.2.1
   eslint: 8.32.0
   eslint-config-prettier: 8.6.0
   eslint-plugin-svelte3: 4.0.0
@@ -32,6 +33,7 @@ specifiers:
 
 dependencies:
   '@prisma/client': 4.9.0_prisma@4.9.0
+  clsx: 1.2.1
   zod: 3.20.2
 
 devDependencies:
@@ -908,6 +910,11 @@ packages:
       slice-ansi: 5.0.0
       string-width: 5.1.2
     dev: true
+
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
+    dev: false
 
   /color-convert/2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}

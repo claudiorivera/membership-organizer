@@ -1,20 +1,38 @@
 import { createEventSchema } from "$lib";
 import { PrismaClient } from "@prisma/client";
-import { fail, redirect } from "@sveltejs/kit";
+import { fail, redirect, type Load } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 
 const prisma = new PrismaClient();
+
+export const load: Load = async () => {
+	const locations = await prisma.location.findMany({
+		select: {
+			id: true,
+			name: true,
+		},
+	});
+
+	return {
+		locationOptions: locations.map((location) => ({
+			value: location.id,
+			label: location.name,
+		})),
+	};
+};
 
 export const actions: Actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
 
-		const validation = createEventSchema.safeParse({
+		const formValues = {
 			title: formData.get("title"),
 			description: formData.get("description"),
 			locationId: formData.get("locationId"),
 			startDateTime: formData.get("startDateTime"),
-		});
+		};
+
+		const validation = createEventSchema.safeParse(formValues);
 
 		if (!validation.success) {
 			const errors = {
