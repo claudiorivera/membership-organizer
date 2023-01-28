@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatEventDateTime } from "$lib";
+	import { formatDateTime } from "$lib/utils";
 	import type { PageData } from "./$types";
 
 	export let data: PageData;
@@ -16,7 +16,7 @@
 		<thead>
 			<tr class="bg-slate-200 font-bold">
 				<th class="p-4 text-left font-medium text-black">Title</th>
-				<th class="p-4 text-left font-medium text-black">Starts</th>
+				<th class="p-4 text-left font-medium text-black">Date & Time</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,9 +34,7 @@
 							href={`/events/${event.id}`}
 							tabIndex={-1}
 						>
-							{formatEventDateTime({
-								startDateTime: event.startDateTime,
-							})}
+							{formatDateTime(event.startDateTime)}
 						</a>
 					</td>
 				</tr>

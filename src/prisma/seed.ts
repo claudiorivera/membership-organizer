@@ -1,8 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import { faker } from "@faker-js/faker";
-
-import { capitalizeEveryWord } from "../lib";
+import { capitalizeEveryWord } from "../lib/utils";
 
 const NUMBER_OF_EVENTS = 3;
 
@@ -12,10 +11,6 @@ export const seed = async () => {
 
 	for (let i = 0; i < NUMBER_OF_EVENTS; i++) {
 		const startDateTime = faker.date.soon(60);
-		const endDateTime = new Date(
-			startDateTime.getTime() +
-				1000 * 60 * 60 * faker.datatype.number({ min: 1, max: 4 }),
-		);
 
 		await prisma.event.create({
 			data: {
@@ -32,9 +27,6 @@ export const seed = async () => {
 					},
 				},
 				startDateTime,
-				endDateTime,
-				imageUrl: faker.image.abstract(),
-				isCancelled: faker.datatype.boolean(),
 			},
 		});
 	}

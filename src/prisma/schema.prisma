@@ -17,10 +17,7 @@ model Event {
 
   title         String
   description   String?
-  startDateTime DateTime  @default(now())
-  endDateTime   DateTime? @default(now())
-  isCancelled   Boolean   @default(false)
-  imageUrl      String?
+  startDateTime DateTime @default(now())
 }
 
 model Location {

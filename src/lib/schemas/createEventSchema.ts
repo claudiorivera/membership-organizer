@@ -10,5 +10,7 @@ export const createEventSchema = z.object({
 			invalid_type_error: "Required",
 		})
 		.cuid(),
-	startDateTime: z.string().datetime(),
+	startDateTime: z.date({
+		invalid_type_error: "Required",
+	}),
 });

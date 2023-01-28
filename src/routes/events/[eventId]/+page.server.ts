@@ -1,4 +1,4 @@
-import { updateEventSchema } from "$lib";
+import { updateEventSchema } from "$lib/schemas";
 import { PrismaClient } from "@prisma/client";
 import { fail, redirect, type Load } from "@sveltejs/kit";
 import type { Actions } from "./$types";
@@ -6,22 +6,45 @@ import type { Actions } from "./$types";
 const prisma = new PrismaClient();
 
 export const load: Load = async ({ params }) => {
+	const event = await prisma.event.findUnique({
+		where: {
+			id: params.eventId,
+		},
+		select: {
+			id: true,
+			title: true,
+			description: true,
+			locationId: true,
+			startDateTime: true,
+		},
+	});
+
+	const locations = await prisma.location.findMany({
+		select: {
+			id: true,
+			name: true,
+		},
+	});
+
 	return {
-		event: await prisma.event.findUnique({
-			where: {
-				id: params.eventId,
-			},
-		}),
+		event,
+		locationOptions: locations.map((location) => ({
+			value: location.id,
+			label: location.name,
+		})),
 	};
 };
 
 export const actions: Actions = {
 	default: async ({ request, params }) => {
 		const formData = await request.formData();
+		const startDateTime = formData.get("startDateTime")?.toString();
 
 		const formValues = {
-			title: formData.get("title"),
-			description: formData.get("description"),
+			title: formData.get("title")?.toString(),
+			description: formData.get("description")?.toString(),
+			locationId: formData.get("locationId")?.toString(),
+			startDateTime: startDateTime ? new Date(startDateTime) : null,
 		};
 
 		const validation = updateEventSchema.safeParse(formValues);

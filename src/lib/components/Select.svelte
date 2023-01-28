@@ -5,6 +5,7 @@
 	export let errors: Array<string> | undefined;
 	export let name: string;
 	export let options: Array<{ value: string; label: string }>;
+	export let value: string | null | undefined;
 </script>
 
 <label class="flex">
@@ -12,6 +13,7 @@
 	<div class="flex flex-col flex-grow">
 		<select
 			{name}
+			{value}
 			class={clsx("rounded", {
 				"border-red-500": errors,
 			})}
