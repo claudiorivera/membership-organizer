@@ -1,6 +1,5 @@
-export const capitalizeEveryWord = (str: string) => {
-	return str
+export const capitalizeEveryWord = (rawString: string) =>
+	rawString
 		.split(" ")
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 		.join(" ");
-};

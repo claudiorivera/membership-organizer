@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { clsx } from "clsx";
+	import Errors from "./Errors.svelte";
 
 	export let label: string;
 	export let errors: Array<string> | undefined;
 	export let name: string;
 	export let options: Array<{ value: string; label: string }>;
-	export let value: string | null | undefined;
+	export let value: string = "";
 </script>
 
 <label class="flex">
@@ -23,8 +24,7 @@
 				<option value={option.value}>{option.label}</option>
 			{/each}
 		</select>
-		{#if errors}
-			<span class="text-red-500 text-xs">{errors}</span>
-		{/if}
+
+		<Errors {errors} />
 	</div>
 </label>

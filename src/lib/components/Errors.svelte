@@ -5,7 +5,7 @@
 {#if errors}
 	<div>
 		{#each errors as error}
-			<div class="text-red-500">{error}</div>
+			<span class="text-red-500">{error}</span>
 		{/each}
 	</div>
 {/if}

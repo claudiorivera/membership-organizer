@@ -1,23 +1,30 @@
 import { updateEventSchema } from "$lib/schemas";
+import { dateFromInputValue, inputValueFromDate } from "$lib/utils";
 import { PrismaClient } from "@prisma/client";
 import { fail, redirect, type Load } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 
 const prisma = new PrismaClient();
 
+const defaultEventSelect = {
+	id: true,
+	title: true,
+	description: true,
+	locationId: true,
+	startDateTime: true,
+};
+
 export const load: Load = async ({ params }) => {
 	const event = await prisma.event.findUnique({
 		where: {
 			id: params.eventId,
 		},
-		select: {
-			id: true,
-			title: true,
-			description: true,
-			locationId: true,
-			startDateTime: true,
-		},
+		select: defaultEventSelect,
 	});
+
+	if (!event) {
+		throw redirect(302, "/");
+	}
 
 	const locations = await prisma.location.findMany({
 		select: {
@@ -27,7 +34,10 @@ export const load: Load = async ({ params }) => {
 	});
 
 	return {
-		event,
+		event: {
+			...event,
+			startDateTime: inputValueFromDate(event.startDateTime),
+		},
 		locationOptions: locations.map((location) => ({
 			value: location.id,
 			label: location.name,
@@ -38,16 +48,14 @@ export const load: Load = async ({ params }) => {
 export const actions: Actions = {
 	default: async ({ request, params }) => {
 		const formData = await request.formData();
-		const startDateTime = formData.get("startDateTime")?.toString();
+		const formValues = Object.fromEntries(formData.entries());
 
-		const formValues = {
-			title: formData.get("title")?.toString(),
-			description: formData.get("description")?.toString(),
-			locationId: formData.get("locationId")?.toString(),
-			startDateTime: startDateTime ? new Date(startDateTime) : null,
-		};
+		const startDateTime = dateFromInputValue(formValues.startDateTime);
 
-		const validation = updateEventSchema.safeParse(formValues);
+		const validation = updateEventSchema.safeParse({
+			...formValues,
+			startDateTime,
+		});
 
 		if (!validation.success) {
 			const errors = {

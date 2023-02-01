@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FormErrors from "$lib/components/FormErrors.svelte";
+	import Errors from "$lib/components/Errors.svelte";
 	import Input from "$lib/components/Input.svelte";
 	import Select from "$lib/components/Select.svelte";
 	import Textarea from "$lib/components/Textarea.svelte";
@@ -13,7 +13,8 @@
 	<h1 class="text-xl font-semibold pb-3">Event Details</h1>
 
 	<form method="POST" class="flex flex-col gap-4">
-		<FormErrors errors={form?.formErrors} />
+		<Errors errors={form?.formErrors} />
+
 		<Input
 			name="title"
 			value={data.event?.title}

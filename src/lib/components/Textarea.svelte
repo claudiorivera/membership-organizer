@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { clsx } from "clsx";
+	import Errors from "./Errors.svelte";
 
 	export let label: string;
 	export let errors: Array<string> | undefined;
@@ -18,8 +19,7 @@
 				"border-red-500": errors,
 			})}
 		/>
-		{#if errors}
-			<span class="text-red-500 text-xs">{errors}</span>
-		{/if}
+
+		<Errors {errors} />
 	</div>
 </label>
