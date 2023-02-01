@@ -1,16 +1,10 @@
-export const dateFromInputValue = (value: FormDataEntryValue) => {
-	if (typeof value !== "string" || !value.length) return new Date();
+import dayjs from "dayjs";
 
-	const [dateString, timeString] = value.split("T");
+export const dateFromInputValue = (formValue: FormDataEntryValue) => {
+	const dateTime =
+		typeof formValue === "string" && !!formValue.length
+			? formValue
+			: dayjs().format("YYYY-MM-DDTHH:mm");
 
-	const [year, month, day] = dateString.split("-");
-	const [hours, minutes] = timeString.split(":");
-
-	return new Date(
-		parseInt(year),
-		parseInt(month) - 1,
-		parseInt(day),
-		parseInt(hours),
-		parseInt(minutes),
-	);
+	return dayjs(dateTime).toDate();
 };

@@ -1,5 +1,5 @@
 import { createEventSchema } from "$lib/schemas";
-import { dateFromInputValue } from "$lib/utils";
+import { dateFromInputValue } from "$lib/utils/dateFromInputValue";
 import { PrismaClient } from "@prisma/client";
 import { fail, redirect, type Load } from "@sveltejs/kit";
 import type { Actions } from "./$types";
@@ -26,12 +26,11 @@ export const actions: Actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
 		const formValues = Object.fromEntries(formData.entries());
-
-		const startDateTime = dateFromInputValue(formValues.startDateTime);
+		const parsedStartDateTime = dateFromInputValue(formValues.startDateTime);
 
 		const validation = createEventSchema.safeParse({
 			...formValues,
-			startDateTime,
+			startDateTime: parsedStartDateTime,
 		});
 
 		if (!validation.success) {

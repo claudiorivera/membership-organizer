@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { formatDateTime, inputValueFromDate } from "$lib/utils";
 	import type { PageData } from "./$types";
+	import dayjs from "dayjs";
 
 	export let data: PageData;
 </script>
@@ -34,7 +34,7 @@
 							href={`/events/${event.id}`}
 							tabIndex={-1}
 						>
-							{formatDateTime(event.startDateTime)}
+							{dayjs(event.startDateTime).format("MMM D, YYYY [at] h:mma")}
 						</a>
 					</td>
 				</tr>

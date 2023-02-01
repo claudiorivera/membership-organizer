@@ -6,7 +6,7 @@
 	export let errors: Array<string> | undefined;
 	export let name: string;
 	export let options: Array<{ value: string; label: string }>;
-	export let value: string = "";
+	export let value = "";
 </script>
 
 <label class="flex">

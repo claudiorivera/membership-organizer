@@ -5,8 +5,8 @@
 	export let label: string;
 	export let errors: Array<string> | undefined;
 	export let name: string;
-	export let type: string = "text";
-	export let value: string = "";
+	export let type = "text";
+	export let value = "";
 </script>
 
 <label class="flex">

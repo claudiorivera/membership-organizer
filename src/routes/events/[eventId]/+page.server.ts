@@ -1,7 +1,8 @@
 import { updateEventSchema } from "$lib/schemas";
-import { dateFromInputValue, inputValueFromDate } from "$lib/utils";
+import { dateFromInputValue } from "$lib/utils";
 import { PrismaClient } from "@prisma/client";
 import { fail, redirect, type Load } from "@sveltejs/kit";
+import dayjs from "dayjs";
 import type { Actions } from "./$types";
 
 const prisma = new PrismaClient();
@@ -36,7 +37,7 @@ export const load: Load = async ({ params }) => {
 	return {
 		event: {
 			...event,
-			startDateTime: inputValueFromDate(event.startDateTime),
+			startDateTime: dayjs(event.startDateTime).format("YYYY-MM-DDTHH:mm"),
 		},
 		locationOptions: locations.map((location) => ({
 			value: location.id,
@@ -49,12 +50,11 @@ export const actions: Actions = {
 	default: async ({ request, params }) => {
 		const formData = await request.formData();
 		const formValues = Object.fromEntries(formData.entries());
-
-		const startDateTime = dateFromInputValue(formValues.startDateTime);
+		const parsedStartDateTime = dateFromInputValue(formValues.startDateTime);
 
 		const validation = updateEventSchema.safeParse({
 			...formValues,
-			startDateTime,
+			startDateTime: parsedStartDateTime,
 		});
 
 		if (!validation.success) {
