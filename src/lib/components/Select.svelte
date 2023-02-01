@@ -19,7 +19,7 @@
 				"border-red-500": errors,
 			})}
 		>
-			<option selected disabled>Select an option</option>
+			<option selected disabled value="">Select an option</option>
 			{#each options as option}
 				<option value={option.value}>{option.label}</option>
 			{/each}
