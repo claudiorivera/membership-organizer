@@ -1,4 +1,9 @@
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.guess();
 
 export const dateFromInputValue = (formValue: FormDataEntryValue) => {
 	const dateTime =
@@ -6,5 +11,5 @@ export const dateFromInputValue = (formValue: FormDataEntryValue) => {
 			? formValue
 			: dayjs().format("YYYY-MM-DDTHH:mm");
 
-	return dayjs(dateTime).toDate();
+	return dayjs(dateTime).utc().toDate();
 };
