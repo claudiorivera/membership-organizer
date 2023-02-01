@@ -1,4 +1,4 @@
 export * from "./capitalizeEveryWord";
 export * from "./dateFromInputValue";
-export * from "./formatEventDateTime";
+export * from "./formatDateTime";
 export * from "./inputValueFromDate";
