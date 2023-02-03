@@ -5,5 +5,9 @@ dayjs.extend(utc);
 export const dateFromInputValues = (value: string, utcOffset: number) => {
 	const dateTime = value.length ? value : dayjs().format("YYYY-MM-DDTHH:mm");
 
-	return dayjs(dateTime).utcOffset(utcOffset).toDate();
+	const date = dayjs(dateTime).utcOffset(utcOffset).toDate();
+
+	console.log({ date, value, utcOffset });
+
+	return date;
 };
