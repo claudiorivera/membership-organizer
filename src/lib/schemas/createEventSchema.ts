@@ -10,7 +10,6 @@ export const createEventSchema = z.object({
 			invalid_type_error: "Required",
 		})
 		.cuid(),
-	startDateTime: z.date({
-		invalid_type_error: "Required",
-	}),
+	startDateTime: z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/),
+	utcOffset: z.string(),
 });

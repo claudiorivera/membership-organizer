@@ -10,7 +10,7 @@ export const seed = async () => {
 	await prisma.location.deleteMany();
 
 	for (let i = 0; i < NUMBER_OF_EVENTS; i++) {
-		const startDateTime = faker.date.soon(60);
+		const startDateTime = faker.date.soon(60).toISOString();
 
 		await prisma.event.create({
 			data: {

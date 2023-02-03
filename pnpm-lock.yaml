@@ -12,7 +12,6 @@ specifiers:
   '@typescript-eslint/parser': 5.50.0
   autoprefixer: 10.4.13
   clsx: 1.2.1
-  dayjs: 1.11.7
   eslint: 8.33.0
   eslint-config-prettier: 8.6.0
   eslint-plugin-svelte3: 4.0.0
@@ -35,7 +34,6 @@ specifiers:
 dependencies:
   '@prisma/client': 4.9.0_prisma@4.9.0
   clsx: 1.2.1
-  dayjs: 1.11.7
   zod: 3.20.2
 
 devDependencies:
@@ -1057,10 +1055,6 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
     dev: true
-
-  /dayjs/1.11.7:
-    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
-    dev: false
 
   /debug/4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}

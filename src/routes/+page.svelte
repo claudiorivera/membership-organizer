@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { formatIsoString } from "$lib/utils";
 	import type { PageData } from "./$types";
-	import dayjs from "dayjs";
 
 	export let data: PageData;
 </script>
@@ -34,7 +34,7 @@
 							href={`/events/${event.id}`}
 							tabIndex={-1}
 						>
-							{dayjs(event.startDateTime).format("MMM D, YYYY [at] h:mma")}
+							{formatIsoString(event.startDateTime)}
 						</a>
 					</td>
 				</tr>

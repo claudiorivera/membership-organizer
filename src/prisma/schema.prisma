@@ -17,7 +17,7 @@ model Event {
 
   title         String
   description   String?
-  startDateTime DateTime @default(now())
+  startDateTime String
 }
 
 model Location {

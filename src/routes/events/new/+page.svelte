@@ -3,7 +3,6 @@
 	import Input from "$lib/components/Input.svelte";
 	import Select from "$lib/components/Select.svelte";
 	import Textarea from "$lib/components/Textarea.svelte";
-	import dayjs from "dayjs";
 	import type { ActionData, PageData } from "./$types";
 
 	export let form: ActionData;
@@ -42,7 +41,6 @@
 			type="datetime-local"
 			errors={form?.fieldErrors.startDateTime}
 			pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
-			value={dayjs(new Date()).format("YYYY-MM-DDTHH:mm")}
 		/>
 		<input
 			type="hidden"

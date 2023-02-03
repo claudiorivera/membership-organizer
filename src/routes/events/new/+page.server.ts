@@ -26,15 +26,8 @@ export const actions: Actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
 		const formValues = Object.fromEntries(formData.entries());
-		const parsedStartDateTime = dateFromInputValues(
-			formValues.startDateTime.toString(),
-			parseInt(formValues.utcOffset.toString()),
-		);
 
-		const validation = createEventSchema.safeParse({
-			...formValues,
-			startDateTime: parsedStartDateTime,
-		});
+		const validation = createEventSchema.safeParse(formValues);
 
 		if (!validation.success) {
 			const errors = {
@@ -45,8 +38,17 @@ export const actions: Actions = {
 			return fail(400, errors);
 		}
 
+		const data = {
+			...validation.data,
+			utcOffset: undefined,
+			startDateTime: dateFromInputValues(
+				validation.data.startDateTime,
+				parseInt(validation.data.utcOffset),
+			),
+		};
+
 		const event = await prisma.event.create({
-			data: validation.data,
+			data,
 		});
 
 		if (event) {

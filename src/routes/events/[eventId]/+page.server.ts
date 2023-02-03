@@ -1,8 +1,7 @@
 import { updateEventSchema } from "$lib/schemas";
-import { dateFromInputValues } from "$lib/utils";
+import { dateFromInputValues, inputValueFromIsoString } from "$lib/utils";
 import { PrismaClient } from "@prisma/client";
 import { fail, redirect, type Load } from "@sveltejs/kit";
-import dayjs from "dayjs";
 import type { Actions } from "./$types";
 
 const prisma = new PrismaClient();
@@ -37,7 +36,7 @@ export const load: Load = async ({ params }) => {
 	return {
 		event: {
 			...event,
-			startDateTime: dayjs(event.startDateTime).format("YYYY-MM-DDTHH:mm"),
+			startDateTime: inputValueFromIsoString(event.startDateTime),
 		},
 		locationOptions: locations.map((location) => ({
 			value: location.id,
@@ -50,15 +49,8 @@ export const actions: Actions = {
 	default: async ({ request, params }) => {
 		const formData = await request.formData();
 		const formValues = Object.fromEntries(formData.entries());
-		const parsedStartDateTime = dateFromInputValues(
-			formValues.startDateTime.toString(),
-			parseInt(formValues.utcOffset.toString()),
-		);
 
-		const validation = updateEventSchema.safeParse({
-			...formValues,
-			startDateTime: parsedStartDateTime,
-		});
+		const validation = updateEventSchema.safeParse(formValues);
 
 		if (!validation.success) {
 			const errors = {
@@ -69,11 +61,20 @@ export const actions: Actions = {
 			return fail(400, errors);
 		}
 
+		const data = {
+			...validation.data,
+			utcOffset: undefined,
+			startDateTime: dateFromInputValues(
+				validation.data?.startDateTime,
+				parseInt(validation.data?.utcOffset ?? ""),
+			),
+		};
+
 		const event = await prisma.event.update({
 			where: {
 				id: params.eventId,
 			},
-			data: validation.data,
+			data,
 		});
 
 		if (event) {

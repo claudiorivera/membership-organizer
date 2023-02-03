@@ -1,13 +1,13 @@
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-dayjs.extend(utc);
+export const dateFromInputValues = (value?: string, utcOffset?: number) => {
+	console.log({ value, utcOffset });
 
-export const dateFromInputValues = (value: string, utcOffset: number) => {
-	const dateTime = value.length ? value : dayjs().format("YYYY-MM-DDTHH:mm");
+	if (!value || !utcOffset) return new Date().toISOString();
 
-	const date = dayjs(dateTime).utcOffset(utcOffset).toDate();
+	const date = new Date(`${value}Z`);
 
-	console.log({ value, utcOffset, dateTime, date });
+	date.setMinutes(date.getMinutes() + utcOffset);
 
-	return date;
+	console.log({ date: date.toISOString() });
+
+	return date.toISOString();
 };
