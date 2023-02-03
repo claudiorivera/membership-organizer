@@ -28,6 +28,7 @@ export const actions: Actions = {
 		const formValues = Object.fromEntries(formData.entries());
 		const parsedStartDateTime = dateFromInputValues(
 			formValues.startDateTime.toString(),
+			parseInt(formValues.utcOffset.toString()),
 		);
 
 		const validation = createEventSchema.safeParse({

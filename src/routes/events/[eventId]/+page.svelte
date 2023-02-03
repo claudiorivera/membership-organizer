@@ -44,6 +44,12 @@
 			label="Start Date & Time"
 			type="datetime-local"
 			errors={form?.fieldErrors.startDateTime}
+			pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
+		/>
+		<input
+			type="hidden"
+			name="utcOffset"
+			value={new Date().getTimezoneOffset()}
 		/>
 
 		<button

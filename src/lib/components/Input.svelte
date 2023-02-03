@@ -7,6 +7,7 @@
 	export let name: string;
 	export let type = "text";
 	export let value = "";
+	export let pattern: string | null = null;
 </script>
 
 <label class="flex">
@@ -16,6 +17,7 @@
 			{type}
 			{name}
 			{value}
+			{pattern}
 			class={clsx("rounded", {
 				"border-red-500": errors,
 			})}
