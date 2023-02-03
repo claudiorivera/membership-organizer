@@ -7,7 +7,7 @@ export const dateFromInputValues = (value: string, utcOffset: number) => {
 
 	const date = dayjs(dateTime).utcOffset(utcOffset).toDate();
 
-	console.log({ date, value, utcOffset });
+	console.log({ value, utcOffset, dateTime, date });
 
 	return date;
 };
