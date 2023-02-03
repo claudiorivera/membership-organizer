@@ -1,5 +1,5 @@
 import { updateEventSchema } from "$lib/schemas";
-import { dateFromInputValue } from "$lib/utils";
+import { dateFromInputValues } from "$lib/utils";
 import { PrismaClient } from "@prisma/client";
 import { fail, redirect, type Load } from "@sveltejs/kit";
 import dayjs from "dayjs";
@@ -50,7 +50,9 @@ export const actions: Actions = {
 	default: async ({ request, params }) => {
 		const formData = await request.formData();
 		const formValues = Object.fromEntries(formData.entries());
-		const parsedStartDateTime = dateFromInputValue(formValues.startDateTime);
+		const parsedStartDateTime = dateFromInputValues(
+			formValues.startDateTime.toString(),
+		);
 
 		const validation = updateEventSchema.safeParse({
 			...formValues,
