@@ -21,7 +21,7 @@
 		</thead>
 		<tbody>
 			{#each data.events as event}
-				<tr class="border-base border-b last:border-none hover:bg-base-200">
+				<tr class="border-base border-b last:border-none">
 					<td class="p-4">
 						<a class="hover:text-sky-700" href={`/events/${event.id}`}
 							>{event.title}</a
