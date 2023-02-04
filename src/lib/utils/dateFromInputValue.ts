@@ -3,7 +3,5 @@ export const dateFromInputValues = (value: string, utcOffset: number) => {
 
 	date.setMinutes(date.getMinutes() + utcOffset);
 
-	console.log({ value, utcOffset, date });
-
 	return date;
 };

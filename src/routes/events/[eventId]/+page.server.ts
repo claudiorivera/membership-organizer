@@ -1,4 +1,5 @@
-import { updateEventSchema } from "$lib/schemas";
+import { createEventSchema, updateEventSchema } from "$lib/schemas";
+import { dateFromInputValues } from "$lib/utils";
 import { PrismaClient } from "@prisma/client";
 import { fail, redirect, type Load } from "@sveltejs/kit";
 import type { Actions } from "./$types";
@@ -46,7 +47,7 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		const formValues = Object.fromEntries(formData.entries());
 
-		const validation = updateEventSchema.safeParse(formValues);
+		const validation = createEventSchema.safeParse(formValues);
 
 		if (!validation.success) {
 			const errors = {
@@ -59,6 +60,10 @@ export const actions: Actions = {
 
 		const data = {
 			...validation.data,
+			startDateTime: dateFromInputValues(
+				validation.data?.startDateTime,
+				parseInt(validation.data?.utcOffset),
+			),
 			utcOffset: undefined,
 		};
 
