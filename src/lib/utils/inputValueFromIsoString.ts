@@ -10,7 +10,5 @@ export const inputValueFromIsoString = (isoString: string): string => {
 
 	const inputValue = `${year}-${month}-${day}T${hours}:${minutes}`;
 
-	console.log({ isoString, inputValue });
-
 	return inputValue;
 };

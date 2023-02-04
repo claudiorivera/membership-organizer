@@ -9,7 +9,5 @@ export const formatIsoString = (isoString: string): string => {
 		minute: "2-digit",
 	});
 
-	console.log({ isoString, parsedDate });
-
 	return parsedDate;
 };
