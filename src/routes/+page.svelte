@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatIsoString } from "$lib/utils";
+	import { formatDateTime } from "$lib/utils";
 	import type { PageData } from "./$types";
 
 	export let data: PageData;
@@ -34,7 +34,7 @@
 							href={`/events/${event.id}`}
 							tabIndex={-1}
 						>
-							{formatIsoString(event.startDateTime)}
+							{formatDateTime(event.startDateTime)}
 						</a>
 					</td>
 				</tr>

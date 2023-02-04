@@ -1,9 +1,9 @@
-export const dateFromInputValues = (value?: string, utcOffset?: number) => {
-	if (!value || !utcOffset) return new Date().toISOString();
-
+export const dateFromInputValues = (value: string, utcOffset: number) => {
 	const date = new Date(`${value}Z`);
 
 	date.setMinutes(date.getMinutes() + utcOffset);
 
-	return date.toISOString();
+	console.log({ value, utcOffset, date });
+
+	return date;
 };

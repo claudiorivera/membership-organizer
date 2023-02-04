@@ -3,6 +3,7 @@
 	import Input from "$lib/components/Input.svelte";
 	import Select from "$lib/components/Select.svelte";
 	import Textarea from "$lib/components/Textarea.svelte";
+	import { inputValueFromDate } from "$lib/utils";
 	import type { ActionData, PageData } from "./$types";
 
 	export let data: PageData;
@@ -40,7 +41,7 @@
 
 		<Input
 			name="startDateTime"
-			value={data.event?.startDateTime}
+			value={inputValueFromDate(data.event?.startDateTime)}
 			label="Start Date & Time"
 			type="datetime-local"
 			errors={form?.fieldErrors.startDateTime}

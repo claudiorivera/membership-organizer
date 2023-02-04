@@ -27,6 +27,8 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		const formValues = Object.fromEntries(formData.entries());
 
+		console.log({ formValues });
+
 		const validation = createEventSchema.safeParse(formValues);
 
 		if (!validation.success) {

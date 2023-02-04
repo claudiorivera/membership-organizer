@@ -1,5 +1,4 @@
 import { updateEventSchema } from "$lib/schemas";
-import { dateFromInputValues, inputValueFromIsoString } from "$lib/utils";
 import { PrismaClient } from "@prisma/client";
 import { fail, redirect, type Load } from "@sveltejs/kit";
 import type { Actions } from "./$types";
@@ -34,10 +33,7 @@ export const load: Load = async ({ params }) => {
 	});
 
 	return {
-		event: {
-			...event,
-			startDateTime: inputValueFromIsoString(event.startDateTime),
-		},
+		event,
 		locationOptions: locations.map((location) => ({
 			value: location.id,
 			label: location.name,
@@ -64,10 +60,6 @@ export const actions: Actions = {
 		const data = {
 			...validation.data,
 			utcOffset: undefined,
-			startDateTime: dateFromInputValues(
-				validation.data?.startDateTime,
-				parseInt(validation.data?.utcOffset ?? ""),
-			),
 		};
 
 		const event = await prisma.event.update({

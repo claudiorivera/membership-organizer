@@ -1,14 +1,11 @@
 const pad = (num: number) => (num < 10 ? `0${num}` : num);
 
-export const inputValueFromIsoString = (isoString: string): string => {
-	const date = new Date(isoString);
+export const inputValueFromDate = (date: Date) => {
 	const year = date.getFullYear();
 	const month = pad(date.getMonth() + 1);
 	const day = pad(date.getDate());
-	const hours = pad(date.getHours());
-	const minutes = pad(date.getMinutes());
+	const hour = pad(date.getHours());
+	const minute = pad(date.getMinutes());
 
-	const inputValue = `${year}-${month}-${day}T${hours}:${minutes}`;
-
-	return inputValue;
+	return `${year}-${month}-${day}T${hour}:${minute}`;
 };
