@@ -17,7 +17,7 @@ model Event {
 
   title         String
   description   String?
-  startDateTime String
+  startDateTime DateTime
 }
 
 model Location {

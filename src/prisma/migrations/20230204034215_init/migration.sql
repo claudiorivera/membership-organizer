@@ -6,10 +6,7 @@ CREATE TABLE "Event" (
     "locationId" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
-    "startDateTime" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "endDateTime" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
-    "isCancelled" BOOLEAN NOT NULL DEFAULT false,
-    "imageUrl" TEXT,
+    "startDateTime" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Event_pkey" PRIMARY KEY ("id")
 );
