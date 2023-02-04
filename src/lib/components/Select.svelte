@@ -9,7 +9,7 @@
 	export let value = "";
 </script>
 
-<label class="flex">
+<label class="flex items-center">
 	<span class="w-1/4">{label}</span>
 	<div class="flex flex-col flex-grow">
 		<select
