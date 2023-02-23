@@ -8,38 +8,31 @@
 	];
 </script>
 
-<nav class="p-4 bg-sky-700 shadow-md">
+<nav
+	class="p-4 text-sky-200 font-bold text-xl bg-sky-700 shadow-md flex justify-between"
+>
 	<ul class="flex gap-4">
 		{#each links as link}
 			<li>
 				<a
+					class="hover:text-white"
 					href={link.href}
-					class="hover:text-sky-200 text-sky-200 font-bold text-xl"
-					class:text-white={$page.url.pathname === link.href}>{link.label}</a
+					class:text-sky-100={$page.url.pathname === link.href}>{link.label}</a
 				>
 			</li>
 		{/each}
 	</ul>
+	<div class="hover:text-white">
+		{#if $page.data.session}
+			<a href="/auth/signout" class="button" data-sveltekit-preload-data="off"
+				>Sign Out</a
+			>
+		{:else}
+			<a href="/auth/signin" data-sveltekit-preload-data="off">Sign In</a>
+		{/if}
+	</div>
 </nav>
 
 <main class="max-w-md mx-auto">
-	{#if $page.data.session}
-		{#if $page.data.session.user?.image}
-			<span style="background-image: url('{$page.data.session.user.image}')" />
-		{/if}
-		<span>
-			<small>Signed in as</small><br />
-			<strong
-				>{$page.data.session.user?.email ??
-					$page.data.session.user?.name}</strong
-			>
-		</span>
-		<a href="/auth/signout" class="button" data-sveltekit-preload-data="off"
-			>Sign out</a
-		>
-	{:else}
-		<span>You are not signed in</span>
-		<a href="/auth/signin" data-sveltekit-preload-data="off">Sign in</a>
-	{/if}
 	<slot />
 </main>
