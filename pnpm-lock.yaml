@@ -5,7 +5,7 @@ specifiers:
   '@playwright/test': 1.31.1
   '@prisma/client': 4.10.1
   '@sveltejs/adapter-vercel': 2.2.0
-  '@sveltejs/kit': 1.8.7
+  '@sveltejs/kit': 1.9.0
   '@tailwindcss/forms': 0.5.3
   '@types/node': 18.14.2
   '@typescript-eslint/eslint-plugin': 5.54.0
@@ -39,8 +39,8 @@ dependencies:
 devDependencies:
   '@faker-js/faker': 7.6.0
   '@playwright/test': 1.31.1
-  '@sveltejs/adapter-vercel': 2.2.0_@sveltejs+kit@1.8.7
-  '@sveltejs/kit': 1.8.7_svelte@3.55.1+vite@4.1.4
+  '@sveltejs/adapter-vercel': 2.2.0_@sveltejs+kit@1.9.0
+  '@sveltejs/kit': 1.9.0_svelte@3.55.1+vite@4.1.4
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.7
   '@types/node': 18.14.2
   '@typescript-eslint/eslint-plugin': 5.54.0_6mj2wypvdnknez7kws2nfdgupi
@@ -425,12 +425,12 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /@sveltejs/adapter-vercel/2.2.0_@sveltejs+kit@1.8.7:
+  /@sveltejs/adapter-vercel/2.2.0_@sveltejs+kit@1.9.0:
     resolution: {integrity: sha512-asyVXHOXnBJYr1/FCjEGJyJFvqY4X3jpLwi8oAqXokGy0ac7QGylxKTKGoIv4UjCLgPIsS/wIEpouPeGzkt1ow==}
     peerDependencies:
       '@sveltejs/kit': ^1.5.0
     dependencies:
-      '@sveltejs/kit': 1.8.7_svelte@3.55.1+vite@4.1.4
+      '@sveltejs/kit': 1.9.0_svelte@3.55.1+vite@4.1.4
       '@vercel/nft': 0.22.6
       esbuild: 0.16.17
     transitivePeerDependencies:
@@ -438,8 +438,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.8.7_svelte@3.55.1+vite@4.1.4:
-    resolution: {integrity: sha512-DQ2JpuL4iFdA4wQw4f0W6yAxWov4xN9JOxbmt0VOHNcWeqIiEzw4GY8g4Ve5gF4f4cwjSlcxvUmS+mEGCLduLA==}
+  /@sveltejs/kit/1.9.0_svelte@3.55.1+vite@4.1.4:
+    resolution: {integrity: sha512-+r/jLe0BORdUfgXK0roN9qOeKt9lLsWOxvCEvkZrM9+ZwGtN4Xic3TG5HURfc7j94/+RT+xb7CR/Orw3Wy7wMg==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
     requiresBuild: true
